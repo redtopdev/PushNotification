@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.106
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PushNotification", "PushNotification\PushNotification.csproj", "{B8E48807-6F91-4667-BDD4-36BA819E5AEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PushNotification", "PushNotification\PushNotification.csproj", "{B8E48807-6F91-4667-BDD4-36BA819E5AEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pushnotification.Contract", "Pushnotification.Contract\Pushnotification.Contract.csproj", "{5E76CA18-67BC-40C5-AA83-1774B30766DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pushnotification.Contract", "Pushnotification.Contract\Pushnotification.Contract.csproj", "{5E76CA18-67BC-40C5-AA83-1774B30766DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersistentSubscription", "PersistentSubscription\PersistentSubscription.csproj", "{9C50B8BD-42CA-4806-AFC1-6048323E1606}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KafkaListener", "PersistentSubscription\KafkaListener.csproj", "{9C50B8BD-42CA-4806-AFC1-6048323E1606}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VolatileSubscription", "VolatileSubscription\VolatileSubscription.csproj", "{7A6C342E-9369-485C-A9B6-AB4EA04BD31A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Engaze.Core.MessageBroker.Consumer", "..\Core\Engaze.Core.MessageBroker.Consumer\Engaze.Core.MessageBroker.Consumer.csproj", "{F075D32F-49A6-4978-ABE4-CC3A41723B50}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{9C50B8BD-42CA-4806-AFC1-6048323E1606}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C50B8BD-42CA-4806-AFC1-6048323E1606}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C50B8BD-42CA-4806-AFC1-6048323E1606}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7A6C342E-9369-485C-A9B6-AB4EA04BD31A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7A6C342E-9369-485C-A9B6-AB4EA04BD31A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7A6C342E-9369-485C-A9B6-AB4EA04BD31A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7A6C342E-9369-485C-A9B6-AB4EA04BD31A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F075D32F-49A6-4978-ABE4-CC3A41723B50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F075D32F-49A6-4978-ABE4-CC3A41723B50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F075D32F-49A6-4978-ABE4-CC3A41723B50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F075D32F-49A6-4978-ABE4-CC3A41723B50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
