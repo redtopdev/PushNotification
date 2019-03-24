@@ -6,6 +6,7 @@
     using Microsoft.Extensions.DependencyInjection;
     using System;
     using Engaze.Core.MessageBroker.Consumer;
+    using KafkaListener;
 
     class Program
     {
@@ -32,7 +33,7 @@
              }).ConfigureServices((hostContext, services) =>
              {
                  services.AddLogging();
-                 services.AddSingleton<IMessageHandler>();
+                 services.AddSingleton(typeof(IMessageHandler), typeof(EventoMessageHadler));
                  services.AddHostedService<EventoConsumer>();
 
              })
