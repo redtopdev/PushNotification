@@ -1,9 +1,8 @@
 ﻿using Engaze.Core.MessageBroker.Consumer;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
-namespace KafkaListener
+namespace Engaze.Evento.PushNotification.Service
 {
     public class EventoMessageHadler : IMessageHandler
     {
@@ -15,6 +14,11 @@ namespace KafkaListener
         public void OnMessageReceived(string message)
         {
             Console.WriteLine(message);
+        }
+
+        public Task OnMessageReceivedAsync(string message)
+        {
+            throw new NotImplementedException();
         }
     }
 }

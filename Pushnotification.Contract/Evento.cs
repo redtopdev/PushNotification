@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Pushnotification.Contract
+﻿namespace Engaze.Evento.Pushnotification.Contract
 {
     public class Evento : PushData
     {

@@ -1,4 +1,4 @@
-﻿namespace Engaze.PushNotificationKafkaListener
+﻿namespace Engaze.Evento.PushNotification.Service
 {
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Configuration;
@@ -6,7 +6,6 @@
     using Microsoft.Extensions.DependencyInjection;
     using System;
     using Engaze.Core.MessageBroker.Consumer;
-    using KafkaListener;
 
     class Program
     {

@@ -3,20 +3,17 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <AssemblyName>Engaze.PushNotificationKafkaListener</AssemblyName>
+    <AssemblyName>Engaze.Evento.PushNotification.Service</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Engaze.Core.MessageBroker.Consumer" Version="1.0.4-alpha" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.2.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\Core\Engaze.Core.MessageBroker.Consumer\Engaze.Core.MessageBroker.Consumer.csproj" />
   </ItemGroup>
 
 </Project>

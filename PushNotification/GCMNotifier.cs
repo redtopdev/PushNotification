@@ -7,7 +7,7 @@ using PushSharp.Google;
 using System;
 using System.Collections.Generic;
 
-namespace PushNotification
+namespace Engaze.Evento.PushNotification.Manager
 {
     public class GCMNotifier : IPushNotifier
     {

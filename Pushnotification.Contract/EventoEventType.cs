@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Pushnotification.Contract
+﻿namespace Engaze.Evento.Pushnotification.Contract
 {
     public static class EventoEventType
     {
