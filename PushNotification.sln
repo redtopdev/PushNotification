@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Engaze.Evento.Pushnotificat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Engaze.Evento.PushNotification.Service", "PersistentSubscription\Engaze.Evento.PushNotification.Service.csproj", "{9C50B8BD-42CA-4806-AFC1-6048323E1606}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Engaze.Core.Persistance.Cassandra", "..\Core\Engaze.Core.Persistance.Cassandra\Engaze.Core.Persistance.Cassandra.csproj", "{5CC80EC0-7C5F-4EA7-B6AB-958704339926}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engaze.Evento.PushNotification.Persistance", "Engaze.Evento.PushNotification.Persistance\Engaze.Evento.PushNotification.Persistance.csproj", "{5C27E0D5-9278-4286-BB67-AA345B8D2CB0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{9C50B8BD-42CA-4806-AFC1-6048323E1606}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C50B8BD-42CA-4806-AFC1-6048323E1606}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C50B8BD-42CA-4806-AFC1-6048323E1606}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CC80EC0-7C5F-4EA7-B6AB-958704339926}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CC80EC0-7C5F-4EA7-B6AB-958704339926}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CC80EC0-7C5F-4EA7-B6AB-958704339926}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CC80EC0-7C5F-4EA7-B6AB-958704339926}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C27E0D5-9278-4286-BB67-AA345B8D2CB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C27E0D5-9278-4286-BB67-AA345B8D2CB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C27E0D5-9278-4286-BB67-AA345B8D2CB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C27E0D5-9278-4286-BB67-AA345B8D2CB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

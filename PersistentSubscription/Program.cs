@@ -6,6 +6,7 @@
     using Microsoft.Extensions.DependencyInjection;
     using System;
     using Engaze.Core.MessageBroker.Consumer;
+    using Engaze.Core.Persistance.Cassandra;
 
     class Program
     {
@@ -32,6 +33,7 @@
              }).ConfigureServices((hostContext, services) =>
              {
                  services.AddLogging();
+                 CassandraServiceConfiguration.ConfigureServices(services);
                  services.AddSingleton(typeof(IMessageHandler), typeof(EventoMessageHadler));
                  services.AddHostedService<EventoConsumer>();
 
