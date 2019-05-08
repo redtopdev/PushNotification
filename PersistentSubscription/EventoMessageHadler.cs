@@ -10,10 +10,10 @@ namespace Engaze.Evento.PushNotification.Service
 {
     public class EventoMessageHadler : IMessageHandler
     {
-        private CassandraRepository repo;
-        EventoNotificationManager notificationManager;
+        private IDataRepository repo;
+        INotificationManager notificationManager;
 
-        public EventoMessageHadler(CassandraRepository repository, EventoNotificationManager eventoNotificationManager)
+        public EventoMessageHadler(IDataRepository repository, INotificationManager eventoNotificationManager)
         {
             this.repo = repository;
             this.notificationManager = eventoNotificationManager;
@@ -28,8 +28,6 @@ namespace Engaze.Evento.PushNotification.Service
             try
             {
                 await ProcessMessage(JObject.Parse(message));
-
-
             }
             catch (Exception ex)
             {

@@ -13,6 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Engaze.Core.Persistance.Cas
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engaze.Evento.PushNotification.Persistance", "Engaze.Evento.PushNotification.Persistance\Engaze.Evento.PushNotification.Persistance.csproj", "{5C27E0D5-9278-4286-BB67-AA345B8D2CB0}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Engaze.Core.MessageBroker.Consumer", "..\Core\Engaze.Core.MessageBroker.Consumer\Engaze.Core.MessageBroker.Consumer.csproj", "{E2C8F5C5-CAD5-4CA1-A584-5F61254B34C5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Engaze.Core.Common", "..\Core\Engaze.Core.Common\Engaze.Core.Common.csproj", "{E3E9885C-B424-4321-9529-3D237573195B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{5C27E0D5-9278-4286-BB67-AA345B8D2CB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C27E0D5-9278-4286-BB67-AA345B8D2CB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C27E0D5-9278-4286-BB67-AA345B8D2CB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2C8F5C5-CAD5-4CA1-A584-5F61254B34C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2C8F5C5-CAD5-4CA1-A584-5F61254B34C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2C8F5C5-CAD5-4CA1-A584-5F61254B34C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2C8F5C5-CAD5-4CA1-A584-5F61254B34C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3E9885C-B424-4321-9529-3D237573195B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3E9885C-B424-4321-9529-3D237573195B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3E9885C-B424-4321-9529-3D237573195B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3E9885C-B424-4321-9529-3D237573195B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

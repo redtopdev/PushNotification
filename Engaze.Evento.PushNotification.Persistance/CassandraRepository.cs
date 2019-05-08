@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Engaze.Evento.PushNotification.Persistance
 {
-    public class CassandraRepository : IViewDataRepository
+    public class CassandraRepository : IDataRepository
     {
         private CassandraSessionCacheManager sessionCacheManager;
         internal static string SELECTUSERIDSTATEMENT = "select userid from ez_event " +

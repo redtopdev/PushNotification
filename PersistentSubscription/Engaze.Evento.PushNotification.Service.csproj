@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Engaze.Core.MessageBroker.Consumer" Version="1.0.4-alpha" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
@@ -17,9 +16,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\Engaze.Core.MessageBroker.Consumer\Engaze.Core.MessageBroker.Consumer.csproj" />
     <ProjectReference Include="..\..\Core\Engaze.Core.Persistance.Cassandra\Engaze.Core.Persistance.Cassandra.csproj" />
     <ProjectReference Include="..\Engaze.Evento.PushNotification.Persistance\Engaze.Evento.PushNotification.Persistance.csproj" />
     <ProjectReference Include="..\PushNotification\Engaze.Evento.PushNotification.Manager.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

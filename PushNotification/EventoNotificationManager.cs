@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Engaze.Evento.PushNotification.Manager
 {
-    public class EventoNotificationManager
+    public class EventoNotificationManager : INotificationManager
     {
         private IPushNotifier Notifier;
         public void NotifyEventCreation(IPushNotifier notifier)
@@ -34,7 +34,10 @@ namespace Engaze.Evento.PushNotification.Manager
         {
             this.NotifyEvent(eventId, eventName, EventoEventType.EventoEnded, registrationIds);
         }
-        public void NotifyExtendEvent(string eventId, string eventName, List<string> registrationIds) { }
+        public void NotifyExtendEvent(string eventId, string eventName, List<string> registrationIds)
+        {
+        }
+
         public void NotifyDeleteEvent(string eventId, string eventName, List<string> registrationIds)
         {
             this.NotifyEvent(eventId, eventName, EventoEventType.EventoDeleted, registrationIds);

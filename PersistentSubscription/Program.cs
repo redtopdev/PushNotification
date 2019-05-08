@@ -10,13 +10,14 @@
 
     class Program
     {
+        private static string ServiceName = "Push Notification Service";
         public static void Main(string[] args)
         {
-           
+            Console.WriteLine(ServiceName + " is starting..");
             new HostBuilder().ConfigureHostConfiguration(configHost =>
             {
                 configHost.AddCommandLine(args);
-                configHost.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                configHost.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
             })
             .ConfigureAppConfiguration((hostContext, configApp) =>
             {
@@ -33,13 +34,14 @@
              }).ConfigureServices((hostContext, services) =>
              {
                  services.AddLogging();
-                 CassandraServiceConfiguration.ConfigureServices(services);
-                 services.AddSingleton(typeof(IMessageHandler), typeof(EventoMessageHadler));
+                 services.ConfigureCassandraServices(hostContext.Configuration);
+                 services.ConfigureConsumerService(hostContext.Configuration, typeof(EventoMessageHadler));
                  services.AddHostedService<EventoConsumer>();
 
              })
              .RunConsoleAsync();
 
+            Console.WriteLine(ServiceName + " is started");
             Console.ReadLine();
         }
     }
