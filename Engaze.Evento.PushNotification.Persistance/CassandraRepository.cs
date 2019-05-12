@@ -14,10 +14,10 @@ namespace Engaze.Evento.PushNotification.Persistance
 
         private string keySpace;
 
-        public CassandraRepository(CassandraSessionCacheManager sessionCacheManager, string keySpace)
+        public CassandraRepository(CassandraSessionCacheManager sessionCacheManager, CassandraConfiguration cassandrConfig)
         {
             this.sessionCacheManager = sessionCacheManager;
-            this.keySpace = keySpace;
+            this.keySpace = cassandrConfig.KeySpace;
         }
 
         public async Task<IEnumerable<string>> GetAffectedUserIdList(Guid eventId)

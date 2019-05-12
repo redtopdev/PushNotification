@@ -9,7 +9,6 @@ namespace Engaze.Evento.PushNotification.Manager
         void NotifyDeleteEvent(string eventId, string eventName, List<string> registrationIds);
         void NotifyEndEvent(string eventId, string eventName, List<string> registrationIds);
         void NotifyEvent(string eventId, string eventName, string eventType, List<string> registrationIds);
-        void NotifyEventCreation(IPushNotifier notifier);
         void NotifyEventResponse();
         void NotifyEventUpdate(string eventId, string eventName, List<string> registrationIds);
         void NotifyEventUpdateLocation(string eventId, string eventName, List<string> registrationIds);

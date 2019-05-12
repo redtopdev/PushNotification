@@ -6,7 +6,7 @@ namespace Engaze.Evento.PushNotification.Manager
     public class EventoNotificationManager : INotificationManager
     {
         private IPushNotifier Notifier;
-        public void NotifyEventCreation(IPushNotifier notifier)
+        public EventoNotificationManager(IPushNotifier notifier)
         {
             this.Notifier = notifier;
         }

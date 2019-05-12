@@ -7,6 +7,8 @@
     using System;
     using Engaze.Core.MessageBroker.Consumer;
     using Engaze.Core.Persistance.Cassandra;
+    using Engaze.Evento.PushNotification.Persistance;
+    using Engaze.Evento.PushNotification.Manager;
 
     class Program
     {
@@ -30,12 +32,16 @@
                      configLogging.AddConsole();
                      configLogging.AddDebug();
                  }
-                 
+
              }).ConfigureServices((hostContext, services) =>
              {
                  services.AddLogging();
                  services.ConfigureCassandraServices(hostContext.Configuration);
-                 services.ConfigureConsumerService(hostContext.Configuration, typeof(EventoMessageHadler));
+                 var sp = services.BuildServiceProvider();
+                 CassandraRepository repo = new CassandraRepository(sp.GetService<CassandraSessionCacheManager>(), sp.GetService<CassandraConfiguration>());
+                 services.AddSingleton(typeof(IDataRepository), repo);
+                 services.ConfigureConsumerService(hostContext.Configuration, new EventoMessageHadler(repo,
+                     new EventoNotificationManager(new GCMNotifier(hostContext.Configuration))));
                  services.AddHostedService<EventoConsumer>();
 
              })

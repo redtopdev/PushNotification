@@ -11,10 +11,10 @@ namespace Engaze.Evento.PushNotification.Manager
 {
     public class GCMNotifier : IPushNotifier
     {
-        private IConfigurationRoot configuration;
+        private IConfiguration configuration;
         private GcmServiceBroker brokerService;
 
-        public GCMNotifier(IConfigurationRoot config)
+        public GCMNotifier(IConfiguration config)
         {
             this.configuration = config;
             InitializeNotifier();

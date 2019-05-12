@@ -1,11 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\Engaze.Core.Persistance.Cassandra\Engaze.Core.Persistance.Cassandra.csproj" />
+    <PackageReference Include="Engaze.Core.Persistance.Cassandra" Version="1.0.5-alpha" />
   </ItemGroup>
 
 </Project>
