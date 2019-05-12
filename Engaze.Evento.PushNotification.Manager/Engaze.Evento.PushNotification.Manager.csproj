@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Pushnotification.Contract\Engaze.Evento.Pushnotification.Contract.csproj" />
+    <ProjectReference Include="..\Engaze.Evento.Pushnotification.Contract\Engaze.Evento.Pushnotification.Contract.csproj" />
   </ItemGroup>
 
 </Project>

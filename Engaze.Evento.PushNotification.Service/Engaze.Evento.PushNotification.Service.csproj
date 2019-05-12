@@ -17,8 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Engaze.Evento.PushNotification.Manager\Engaze.Evento.PushNotification.Manager.csproj" />
     <ProjectReference Include="..\Engaze.Evento.PushNotification.Persistance\Engaze.Evento.PushNotification.Persistance.csproj" />
-    <ProjectReference Include="..\PushNotification\Engaze.Evento.PushNotification.Manager.csproj" />
   </ItemGroup>
 
   <ItemGroup>

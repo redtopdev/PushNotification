@@ -39,7 +39,7 @@ namespace Engaze.Evento.PushNotification.Manager
 
         private void InitializeNotifier()
         {
-            brokerService = new GcmServiceBroker(new GcmConfiguration(configuration.GetValue<string>("AuthToken")));
+            brokerService = new GcmServiceBroker(new GcmConfiguration(configuration.GetValue<string>("GCMAPIKey")));
             //Wire up the events for all the services that the broker registers
             brokerService.OnNotificationSucceeded += NotificationSucceeded;
             brokerService.OnNotificationFailed += NotificationFailed;

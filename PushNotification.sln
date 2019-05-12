@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.106
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Engaze.Evento.PushNotification.Manager", "PushNotification\Engaze.Evento.PushNotification.Manager.csproj", "{B8E48807-6F91-4667-BDD4-36BA819E5AEE}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Engaze.Evento.Pushnotification.Contract", "Pushnotification.Contract\Engaze.Evento.Pushnotification.Contract.csproj", "{5E76CA18-67BC-40C5-AA83-1774B30766DF}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Engaze.Evento.PushNotification.Service", "PersistentSubscription\Engaze.Evento.PushNotification.Service.csproj", "{9C50B8BD-42CA-4806-AFC1-6048323E1606}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Engaze.Evento.PushNotification.Persistance", "Engaze.Evento.PushNotification.Persistance\Engaze.Evento.PushNotification.Persistance.csproj", "{5C27E0D5-9278-4286-BB67-AA345B8D2CB0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Engaze.Evento.Pushnotification.Contract", "Engaze.Evento.Pushnotification.Contract\Engaze.Evento.Pushnotification.Contract.csproj", "{D865D3BF-C440-410E-AD56-98A043EE49DA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Engaze.Evento.PushNotification.Manager", "Engaze.Evento.PushNotification.Manager\Engaze.Evento.PushNotification.Manager.csproj", "{6C12E4B3-6CEE-4B7A-A328-040EA28B57C4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Engaze.Evento.PushNotification.Service", "Engaze.Evento.PushNotification.Service\Engaze.Evento.PushNotification.Service.csproj", "{611616D7-2AE7-4224-9CBF-231376CB2F39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,22 +17,22 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B8E48807-6F91-4667-BDD4-36BA819E5AEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B8E48807-6F91-4667-BDD4-36BA819E5AEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B8E48807-6F91-4667-BDD4-36BA819E5AEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B8E48807-6F91-4667-BDD4-36BA819E5AEE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5E76CA18-67BC-40C5-AA83-1774B30766DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5E76CA18-67BC-40C5-AA83-1774B30766DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5E76CA18-67BC-40C5-AA83-1774B30766DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5E76CA18-67BC-40C5-AA83-1774B30766DF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9C50B8BD-42CA-4806-AFC1-6048323E1606}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9C50B8BD-42CA-4806-AFC1-6048323E1606}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9C50B8BD-42CA-4806-AFC1-6048323E1606}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9C50B8BD-42CA-4806-AFC1-6048323E1606}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5C27E0D5-9278-4286-BB67-AA345B8D2CB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5C27E0D5-9278-4286-BB67-AA345B8D2CB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C27E0D5-9278-4286-BB67-AA345B8D2CB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C27E0D5-9278-4286-BB67-AA345B8D2CB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D865D3BF-C440-410E-AD56-98A043EE49DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D865D3BF-C440-410E-AD56-98A043EE49DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D865D3BF-C440-410E-AD56-98A043EE49DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D865D3BF-C440-410E-AD56-98A043EE49DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C12E4B3-6CEE-4B7A-A328-040EA28B57C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C12E4B3-6CEE-4B7A-A328-040EA28B57C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C12E4B3-6CEE-4B7A-A328-040EA28B57C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C12E4B3-6CEE-4B7A-A328-040EA28B57C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{611616D7-2AE7-4224-9CBF-231376CB2F39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{611616D7-2AE7-4224-9CBF-231376CB2F39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{611616D7-2AE7-4224-9CBF-231376CB2F39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{611616D7-2AE7-4224-9CBF-231376CB2F39}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
