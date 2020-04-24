@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Pushnotification.Contract</AssemblyName>
+    <RootNamespace>Pushnotification.Contract</RootNamespace>
   </PropertyGroup>
 
 </Project>

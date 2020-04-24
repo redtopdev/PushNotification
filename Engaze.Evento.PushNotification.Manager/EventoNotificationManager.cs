@@ -1,7 +1,7 @@
-﻿using Engaze.Evento.Pushnotification.Contract;
+﻿using Pushnotification.Contract;
 using System.Collections.Generic;
 
-namespace Engaze.Evento.PushNotification.Manager
+namespace PushNotification.Manager
 {
     public class EventoNotificationManager : INotificationManager
     {
@@ -53,7 +53,7 @@ namespace Engaze.Evento.PushNotification.Manager
 
         public void NotifyEvent(string eventId, string eventName, string eventType, List<string> registrationIds)
         {
-            this.Notifier.Notify<Engaze.Evento.Pushnotification.Contract.Evento>(registrationIds,
+            this.Notifier.Notify<Pushnotification.Contract.Evento>(registrationIds,
                new Pushnotification.Contract.Evento(eventId, eventName, eventType));
         }
     }

@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>PushNotification.Manager</AssemblyName>
+    <RootNamespace>PushNotification.Manager</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>  
@@ -12,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Engaze.Evento.Pushnotification.Contract\Engaze.Evento.Pushnotification.Contract.csproj" />
+    <ProjectReference Include="..\Engaze.Evento.Pushnotification.Contract\DataContract.csproj" />
   </ItemGroup>
 
 </Project>

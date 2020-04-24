@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Engaze.Evento.PushNotification.Persistance
+namespace PushNotification.Persistance
 {
     public interface IDataRepository
     {

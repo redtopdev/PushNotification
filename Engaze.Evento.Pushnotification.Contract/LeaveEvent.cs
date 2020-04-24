@@ -1,4 +1,4 @@
-﻿namespace Engaze.Evento.Pushnotification.Contract
+﻿namespace Pushnotification.Contract
 {
     public class LeaveEvent : Evento
     {

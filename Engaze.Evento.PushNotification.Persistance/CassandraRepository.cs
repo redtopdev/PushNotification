@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Engaze.Evento.PushNotification.Persistance
+namespace PushNotification.Persistance
 {
     public class CassandraRepository : IDataRepository
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Engaze.Evento.PushNotification.Manager
+namespace PushNotification.Manager
 {
     public interface IPushNotifier
     {

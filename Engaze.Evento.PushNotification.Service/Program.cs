@@ -1,4 +1,4 @@
-﻿namespace Engaze.Evento.PushNotification.Service
+﻿namespace PushNotification.Service
 {
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Configuration;
@@ -7,8 +7,8 @@
     using System;
     using Engaze.Core.MessageBroker.Consumer;
     using Engaze.Core.Persistance.Cassandra;
-    using Engaze.Evento.PushNotification.Persistance;
-    using Engaze.Evento.PushNotification.Manager;
+    using PushNotification.Persistance;
+    using PushNotification.Manager;
 
     class Program
     {

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <AssemblyName>Engaze.Evento.PushNotification.Service</AssemblyName>
+    <AssemblyName>PushNotification.Service</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,8 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Engaze.Evento.PushNotification.Manager\Engaze.Evento.PushNotification.Manager.csproj" />
-    <ProjectReference Include="..\Engaze.Evento.PushNotification.Persistance\Engaze.Evento.PushNotification.Persistance.csproj" />
+    <ProjectReference Include="..\Engaze.Evento.PushNotification.Manager\PushNotificationManager.csproj" />
+    <ProjectReference Include="..\Engaze.Evento.PushNotification.Persistance\DataPersistance.csproj" />
   </ItemGroup>
 
   <ItemGroup>
