@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Engaze.Evento.Pushnotification.Contract\DataContract.csproj" />
+    <ProjectReference Include="..\DataContract\DataContract.csproj" />
   </ItemGroup>
 
 </Project>

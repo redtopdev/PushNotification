@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataPersistance", "Engaze.Evento.PushNotification.Persistance\DataPersistance.csproj", "{5C27E0D5-9278-4286-BB67-AA345B8D2CB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataPersistance", "DataPersistance\DataPersistance.csproj", "{5C27E0D5-9278-4286-BB67-AA345B8D2CB0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataContract", "Engaze.Evento.Pushnotification.Contract\DataContract.csproj", "{D865D3BF-C440-410E-AD56-98A043EE49DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataContract", "DataContract\DataContract.csproj", "{D865D3BF-C440-410E-AD56-98A043EE49DA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PushNotificationManager", "Engaze.Evento.PushNotification.Manager\PushNotificationManager.csproj", "{6C12E4B3-6CEE-4B7A-A328-040EA28B57C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PushNotificationManager", "PushNotificationManager\PushNotificationManager.csproj", "{6C12E4B3-6CEE-4B7A-A328-040EA28B57C4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Engaze.Evento.PushNotification.Service\Service.csproj", "{611616D7-2AE7-4224-9CBF-231376CB2F39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Service\Service.csproj", "{611616D7-2AE7-4224-9CBF-231376CB2F39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

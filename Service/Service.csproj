@@ -17,8 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Engaze.Evento.PushNotification.Manager\PushNotificationManager.csproj" />
-    <ProjectReference Include="..\Engaze.Evento.PushNotification.Persistance\DataPersistance.csproj" />
+    <ProjectReference Include="..\DataContract\DataContract.csproj" />
+    <ProjectReference Include="..\DataPersistance\DataPersistance.csproj" />
+    <ProjectReference Include="..\PushNotificationManager\PushNotificationManager.csproj" />
   </ItemGroup>
 
   <ItemGroup>
