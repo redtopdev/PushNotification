@@ -1,8 +1,8 @@
 ﻿namespace Pushnotification.Contract
 {
-    public class Evento : PushData
+    public class Event : PushData
     {
-        public Evento(string eventId, string eventName, string type) : base(type)
+        public Event(string eventId, string eventName, string type) : base(type)
         {
             this.EventId = eventId;
             this.EventName = eventName;

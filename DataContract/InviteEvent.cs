@@ -1,8 +1,8 @@
 ﻿namespace Pushnotification.Contract
 {
-    public class InviteEvent : Evento
+    public class InviteEvent : Event
     {
-        public InviteEvent(string initiatorId, string initiatorName, string eventId, string eventName, string eventResponderId, string eventResponderName) : base(eventId, eventName, EventoEventType.EventoInvited)
+        public InviteEvent(string initiatorId, string initiatorName, string eventId, string eventName, string eventResponderId, string eventResponderName) : base(eventId, eventName, PushMessageType.EventoInvited)
         {
             this.InitiatorId = initiatorId;
             this.InitiatorName = initiatorName;

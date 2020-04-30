@@ -1,9 +1,12 @@
-﻿using Engaze.Core.MessageBroker.Consumer;
+﻿using Engaze.Core.DataContract;
+using Engaze.Core.MessageBroker.Consumer;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Pushnotification.Contract;
 using PushNotification.Manager;
 using PushNotification.Persistance;
 using System;
-using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PushNotification.Service
@@ -37,44 +40,75 @@ namespace PushNotification.Service
 
         private async Task ProcessMessage(JObject msgJObject)
         {
-            string eventType = msgJObject.Value<string>("EventType");
+            var eventType = msgJObject.Value<OccuredEventType>("EventType");
             JObject eventoObject = msgJObject.Value<JObject>("Data");
-            string eventId = eventoObject.Value<string>("EventoId");
-            var userIds = (await repo.GetAffectedUserIdList(Guid.Parse(eventId))).ToList<string>();
+            Guid eventId = eventoObject.Value<Guid>("EventId");
+            var userIds = eventoObject.Value<IEnumerable<Guid>>("userIds");
+            NotificationData notificationData = null;
 
             switch (eventType)
             {
-                case "EventoCreated":
-                    ////notificationManager.NotifyEventCreation((eventId.ToString(), null, userIds);
-                    break;
-                case "EventoDeleted":
-                    notificationManager.NotifyDeleteEvent(eventId.ToString(), null, userIds);                  
+                case OccuredEventType.EventoCreated:
+                    var evnt = JsonConvert.DeserializeObject(eventoObject.ToString());
+
+                    notificationManager.NotifyEventCreated(notificationData);
                     break;
 
-                case "EventoEnded":
-                    notificationManager.NotifyEndEvent(eventId.ToString(), null, userIds);
+                case OccuredEventType.EventoUpdated:                 
+                    notificationManager.NotifyEventUpdated(CreateMessage(eventoObject, PushMessageType.EventUpdate));
                     break;
 
-                case "EventoExtended":
-                    notificationManager.NotifyExtendEvent(eventId.ToString(), null, userIds);
+                case OccuredEventType.EventoDeleted:                    
+                    notificationManager.NotifyEventDeleted(CreateMessage(eventoObject, PushMessageType.EventDeleted));
                     break;
 
-                case "ParticipantLeft":
-                    notificationManager.NotifyExtendEvent(eventId.ToString(), null, userIds);
+                case OccuredEventType.EventoEnded:
+                    notificationManager.NotifyEventDeleted(CreateMessage(eventoObject, PushMessageType.EventEnd));
                     break;
 
-                case "ParticipantsListUpdated":
-                    notificationManager.NotifyExtendEvent(eventId.ToString(), null, userIds);
+                case OccuredEventType.EventoExtended:
+                    notificationManager.NotifyEventDeleted(CreateMessage(eventoObject, PushMessageType.EventExtend));
                     break;
 
-                case "ParticipantStateUpdated":
-                    notificationManager.NotifyExtendEvent(eventId.ToString(), null, userIds);
+                case OccuredEventType.ParticipantLeft:
+                    notificationManager.NotifyParticipantLeftEvent(notificationData);
+                    break;
+
+                case OccuredEventType.ParticipantAdded:
+                    notificationManager.NotifyParticipantAddded(notificationData);
+                    break;
+
+                case OccuredEventType.ParticipantRemoved:
+                    notificationManager.NotifyParticipantRemoved(notificationData);
+                    break;
+
+                case OccuredEventType.ParticipantStateUpdated:
+                    notificationManager.NotifyParticipantStateUpdated(notificationData);
+                    break;
+
+                case OccuredEventType.ParticipantsListUpdated:
+                    notificationManager.NotifyParticipantListUpdated(notificationData);
                     break;
 
                 default:
                     break;
 
             }
+
+
+            //void NotifyEventUpdateLocation(EventRequestSlim eventRequest, EventSlim evt);         
+
+            //void NotifyEventResponse(EventRequestSlim eventRequest, EventSlim evt);
+            //void NotifyAdditionalRegisteredUserInfoToHost(List<EventParticipantSlim> additionalRegisteredUsers, EventSlim evt);
+            //void NotifyRemindContact(RemindRequestSlim remindReq);
+        }
+
+        private NotificationData CreateMessage(JObject eventoObject, PushMessageType messageType)
+        {
+            return new NotificationData(
+                       eventoObject.Value<Guid>("EventId"), eventoObject.Value<string>("EventName"),
+                       eventoObject.Value<Guid>("InitiatorId"), eventoObject.Value<string>("InitiatorNamr"),
+                       messageType, eventoObject.Value<IEnumerable<Guid>>("userIds"));
         }
     }
 }

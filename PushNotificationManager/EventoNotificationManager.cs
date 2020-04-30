@@ -12,11 +12,11 @@ namespace PushNotification.Manager
         }
         public void NotifyEventUpdate(string eventId, string eventName, List<string> registrationIds)
         {
-            this.NotifyEvent(eventId, eventName, EventoEventType.EventoUpdated, registrationIds);
+            this.NotifyEvent(eventId, eventName, PushMessageType.EventoUpdated, registrationIds);
         }
         public void NotifyEventUpdateParticipants(string eventId, string eventName, List<string> registrationIds)
         {
-            this.NotifyEvent(eventId, eventName, EventoEventType.EventParticipantsUpdated, registrationIds);
+            this.NotifyEvent(eventId, eventName, PushMessageType.EventParticipantsUpdated, registrationIds);
         }
         public void NotifyEventUpdateLocation(string eventId, string eventName, List<string> registrationIds)
         {
@@ -24,15 +24,15 @@ namespace PushNotification.Manager
         }
         public void NotifyAddParticipantToEvent(string eventId, string eventName, List<string> registrationIds)
         {
-            this.NotifyEvent(eventId, eventName, EventoEventType.EventoInvited, registrationIds);
+            this.NotifyEvent(eventId, eventName, PushMessageType.EventoInvited, registrationIds);
         }
         public void NotifyRemoveParticipantFromEvent(string eventId, string eventName, List<string> registrationIds)
         {
-            this.NotifyEvent(eventId, eventName, EventoEventType.RemovedFromEvento, registrationIds);
+            this.NotifyEvent(eventId, eventName, PushMessageType.RemovedFromEvento, registrationIds);
         }
         public void NotifyEndEvent(string eventId, string eventName, List<string> registrationIds)
         {
-            this.NotifyEvent(eventId, eventName, EventoEventType.EventoEnded, registrationIds);
+            this.NotifyEvent(eventId, eventName, PushMessageType.EventoEnded, registrationIds);
         }
         public void NotifyExtendEvent(string eventId, string eventName, List<string> registrationIds)
         {
@@ -40,7 +40,7 @@ namespace PushNotification.Manager
 
         public void NotifyDeleteEvent(string eventId, string eventName, List<string> registrationIds)
         {
-            this.NotifyEvent(eventId, eventName, EventoEventType.EventoDeleted, registrationIds);
+            this.NotifyEvent(eventId, eventName, PushMessageType.EventoDeleted, registrationIds);
         }
         public void NotifyLeftEvent(string eventId, string eventName, List<string> registrationIds)
         {
@@ -51,10 +51,70 @@ namespace PushNotification.Manager
 
         public void NotifyRemindContact() { }
 
-        public void NotifyEvent(string eventId, string eventName, string eventType, List<string> registrationIds)
+        private void NotifyEvent(string eventId, string eventName, string eventType, List<string> registrationIds)
         {
-            this.Notifier.Notify<Pushnotification.Contract.Evento>(registrationIds,
-               new Pushnotification.Contract.Evento(eventId, eventName, eventType));
+            this.Notifier.Notify<Pushnotification.Contract.Event>(registrationIds,
+               new Pushnotification.Contract.Event(eventId, eventName, eventType));
+        }
+
+        public void NotifyEventCreated(NotificationData notificationData)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void NotifyEventDeleted(NotificationData notificationData)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void NotifyEventEnded(NotificationData notificationData)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void NotifyEventUpdated(NotificationData notificationData)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void NotifyEventLocationUpdated(NotificationData notificationData)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void NotifyEventExtended(NotificationData notificationData)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void NotifyParticipantRemoved(NotificationData notificationData)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void NotifyParticipantAddded(NotificationData notificationData)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void NotifyParticipantLeftEvent(NotificationData notificationData)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void NotifyParticipantStateUpdated(NotificationData notificationData)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void NotifyParticipantListUpdated(NotificationData notificationData)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void NotifyDestinationUpdated(NotificationData notificationData)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

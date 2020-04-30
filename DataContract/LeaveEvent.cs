@@ -1,8 +1,8 @@
 ﻿namespace Pushnotification.Contract
 {
-    public class LeaveEvent : Evento
+    public class LeaveEvent : Event
     {
-        public LeaveEvent(string eventId, string eventName, string eventResponderId, string eventResponderName) : base(eventId, eventName, EventoEventType.EventoLeft)
+        public LeaveEvent(string eventId, string eventName, string eventResponderId, string eventResponderName) : base(eventId, eventName, PushMessageType.EventoLeft)
         {
             this.EventResponderId = eventResponderId;
             this.EventResponderName = eventResponderName;
