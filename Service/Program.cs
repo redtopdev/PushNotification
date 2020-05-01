@@ -6,8 +6,6 @@
     using Microsoft.Extensions.DependencyInjection;
     using System;
     using Engaze.Core.MessageBroker.Consumer;
-    using Engaze.Core.Persistance.Cassandra;
-    using PushNotification.Persistance;
     using PushNotification.Manager;
 
     class Program
@@ -36,12 +34,12 @@
              }).ConfigureServices((hostContext, services) =>
              {
                  services.AddLogging();
-                 services.ConfigureCassandraServices(hostContext.Configuration);
-                 var sp = services.BuildServiceProvider();
-                 CassandraRepository repo = new CassandraRepository(sp.GetService<CassandraSessionCacheManager>(), sp.GetService<CassandraConfiguration>());
-                 services.AddSingleton(typeof(IDataRepository), repo);
-                 services.ConfigureConsumerService(hostContext.Configuration, new EventoMessageHadler(repo,
-                     new EventoNotificationManager(new GCMNotifier(hostContext.Configuration))));
+               
+                 var sp = services.BuildServiceProvider();                
+                 services.ConfigureConsumerService(hostContext.Configuration, 
+                     new EventoMessageHadler(
+                         new EventoNotificationManager(new GCMNotifier(hostContext.Configuration), 
+                         new UserProfileClient(hostContext.Configuration))));
                  services.AddHostedService<EventoConsumer>();
 
              })

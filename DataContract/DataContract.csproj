@@ -10,4 +10,8 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Engaze.Core.DataContract\Engaze.Core.DataContract.csproj" />
+  </ItemGroup>
+
 </Project>

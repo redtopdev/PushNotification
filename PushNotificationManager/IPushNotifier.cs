@@ -4,6 +4,6 @@ namespace PushNotification.Manager
 {
     public interface IPushNotifier
     {
-        void Notify<T>(List<string> registrationIds, T notificationData) where T : class;
+        void Notify<T>(IEnumerable<string> registrationIds, T notificationData) where T : class;
     }
 }

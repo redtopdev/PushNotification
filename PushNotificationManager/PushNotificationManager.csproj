@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DataContract\DataContract.csproj" />
+    <ProjectReference Include="..\..\Core\Engaze.Core.DataContract\Engaze.Core.DataContract.csproj" />
   </ItemGroup>
 
 </Project>

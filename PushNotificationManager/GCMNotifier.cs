@@ -21,7 +21,7 @@ namespace PushNotification.Manager
 
         }
 
-        public void Notify<T>(List<string> registrationIds, T notificationData) where T : class
+        public void Notify<T>(IEnumerable<string> registrationIds, T notificationData) where T : class
         {
             brokerService.Start();
             foreach (var regId in registrationIds)

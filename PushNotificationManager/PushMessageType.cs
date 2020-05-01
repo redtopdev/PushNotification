@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Pushnotification.Contract
+namespace PushNotification.Manager
 {
     [JsonConverter(typeof(StringEnumConverter))]
     public enum PushMessageType

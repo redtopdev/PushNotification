@@ -18,8 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Engaze.Core.DataContract\Engaze.Core.DataContract.csproj" />
-    <ProjectReference Include="..\DataContract\DataContract.csproj" />
-    <ProjectReference Include="..\DataPersistance\DataPersistance.csproj" />
     <ProjectReference Include="..\PushNotificationManager\PushNotificationManager.csproj" />
   </ItemGroup>
 

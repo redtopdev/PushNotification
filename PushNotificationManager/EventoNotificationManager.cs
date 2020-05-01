@@ -1,120 +1,159 @@
-﻿using Pushnotification.Contract;
+﻿using Engaze.Core.DataContract;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace PushNotification.Manager
 {
     public class EventoNotificationManager : INotificationManager
     {
         private IPushNotifier Notifier;
-        public EventoNotificationManager(IPushNotifier notifier)
+        private IUserProfileClient userProfileClient;
+
+        public EventoNotificationManager(IPushNotifier notifier, IUserProfileClient userProfileClient)
         {
             this.Notifier = notifier;
-        }
-        public void NotifyEventUpdate(string eventId, string eventName, List<string> registrationIds)
-        {
-            this.NotifyEvent(eventId, eventName, PushMessageType.EventoUpdated, registrationIds);
-        }
-        public void NotifyEventUpdateParticipants(string eventId, string eventName, List<string> registrationIds)
-        {
-            this.NotifyEvent(eventId, eventName, PushMessageType.EventParticipantsUpdated, registrationIds);
-        }
-        public void NotifyEventUpdateLocation(string eventId, string eventName, List<string> registrationIds)
-        {
-           
-        }
-        public void NotifyAddParticipantToEvent(string eventId, string eventName, List<string> registrationIds)
-        {
-            this.NotifyEvent(eventId, eventName, PushMessageType.EventoInvited, registrationIds);
-        }
-        public void NotifyRemoveParticipantFromEvent(string eventId, string eventName, List<string> registrationIds)
-        {
-            this.NotifyEvent(eventId, eventName, PushMessageType.RemovedFromEvento, registrationIds);
-        }
-        public void NotifyEndEvent(string eventId, string eventName, List<string> registrationIds)
-        {
-            this.NotifyEvent(eventId, eventName, PushMessageType.EventoEnded, registrationIds);
-        }
-        public void NotifyExtendEvent(string eventId, string eventName, List<string> registrationIds)
-        {
+            this.userProfileClient = userProfileClient;
         }
 
-        public void NotifyDeleteEvent(string eventId, string eventName, List<string> registrationIds)
+        public async Task HandleEvent(JObject eventObject)
         {
-            this.NotifyEvent(eventId, eventName, PushMessageType.EventoDeleted, registrationIds);
-        }
-        public void NotifyLeftEvent(string eventId, string eventName, List<string> registrationIds)
-        {
-            
-        }
-        public void NotifyAdditionalRegisteredUserInfoToHost() { }
-        public void NotifyEventResponse() { }
+            var eventType = eventObject.Value<OccuredEventType>("EventType");
+            var userIds = GetCurrentUserIds(eventObject);
+            switch (eventType)
+            {
+                case OccuredEventType.EventoCreated:
+                    var notficationData = CreateMessage(eventObject, PushMessageType.EventInvite);
+                    userIds.ToList().Remove(notficationData.InitiatorId);
+                    await NotifyEvent(notficationData, userIds);
+                    break;
 
-        public void NotifyRemindContact() { }
+                case OccuredEventType.EventoUpdated:
+                    await NotifyEventAndParticipantListUpdated(eventObject, userIds);
+                    break;
 
-        private void NotifyEvent(string eventId, string eventName, string eventType, List<string> registrationIds)
-        {
-            this.Notifier.Notify<Pushnotification.Contract.Event>(registrationIds,
-               new Pushnotification.Contract.Event(eventId, eventName, eventType));
-        }
+                case OccuredEventType.EventoDeleted:
+                     notficationData = CreateMessage(eventObject, PushMessageType.EventDeleted);
+                    userIds.ToList().Remove(notficationData.InitiatorId);
+                    await NotifyEvent(notficationData, userIds);
+                    break;
 
-        public void NotifyEventCreated(NotificationData notificationData)
-        {
-            throw new System.NotImplementedException();
-        }
+                case OccuredEventType.EventoEnded:
 
-        public void NotifyEventDeleted(NotificationData notificationData)
-        {
-            throw new System.NotImplementedException();
-        }
+                    notficationData = CreateMessage(eventObject, PushMessageType.EventEnd);
+                    userIds.ToList().Remove(notficationData.InitiatorId);
+                    await NotifyEvent(notficationData, userIds);
+                    break;
 
-        public void NotifyEventEnded(NotificationData notificationData)
-        {
-            throw new System.NotImplementedException();
-        }
+                case OccuredEventType.EventoExtended:
 
-        public void NotifyEventUpdated(NotificationData notificationData)
-        {
-            throw new System.NotImplementedException();
-        }
+                    notficationData = CreateMessage(eventObject, PushMessageType.EventExtend);
+                    notficationData.ExtendDuration = eventObject.Value<int>("ExtendDuration");
+                    userIds.ToList().Remove(notficationData.InitiatorId);
+                    await NotifyEvent(notficationData, userIds);
+                    break;
 
-        public void NotifyEventLocationUpdated(NotificationData notificationData)
-        {
-            throw new System.NotImplementedException();
-        }
+                case OccuredEventType.ParticipantLeft:
 
-        public void NotifyEventExtended(NotificationData notificationData)
-        {
-            throw new System.NotImplementedException();
-        }
+                    notficationData = CreateMessage(eventObject, PushMessageType.EventLeave);
+                    notficationData.ResponderId = eventObject.Value<Guid>("RequesterId");
+                    notficationData.ResponderName = eventObject.Value<string>("RequesterName");
+                    userIds.ToList().Remove(notficationData.ResponderId.Value);
+                    await NotifyEvent(notficationData, userIds);
+                    break;
 
-        public void NotifyParticipantRemoved(NotificationData notificationData)
-        {
-            throw new System.NotImplementedException();
-        }
+                case OccuredEventType.DestinationUpdated:
+                    notficationData = CreateMessage(eventObject, PushMessageType.EventUpdateLocation);
+                    notficationData.DestinationName = eventObject.Value<string>("DestinationName");
+                    userIds = GetCurrentUserIds(eventObject);
+                    userIds.ToList().Remove(notficationData.InitiatorId);
+                    await NotifyEvent(notficationData, userIds);
+                    break;
 
-        public void NotifyParticipantAddded(NotificationData notificationData)
-        {
-            throw new System.NotImplementedException();
-        }
+                case OccuredEventType.ParticipantsListUpdated:
+                    await NotifyEventAndParticipantListUpdated(eventObject, userIds);
+                    break;
 
-        public void NotifyParticipantLeftEvent(NotificationData notificationData)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void NotifyParticipantStateUpdated(NotificationData notificationData)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void NotifyParticipantListUpdated(NotificationData notificationData)
-        {
-            throw new System.NotImplementedException();
+                case OccuredEventType.ParticipantStateUpdated:
+                    notficationData = CreateMessage(eventObject, PushMessageType.EventLeave);
+                    notficationData.ResponderId = eventObject.Value<Guid>("RequesterId");
+                    notficationData.ResponderName = eventObject.Value<string>("RequesterName");
+                    notficationData.EventAcceptanceState = eventObject.Value<EventAcceptanceState>("EventAcceptanceState");
+                    userIds.ToList().Remove(notficationData.ResponderId.Value);
+                    await NotifyEvent(notficationData, userIds);
+                    break;                    
+            }
         }
 
-        public void NotifyDestinationUpdated(NotificationData notificationData)
+        private NotificationData CreateMessage(JObject eventoObject, PushMessageType messageType)
         {
-            throw new System.NotImplementedException();
+            return new NotificationData(
+                       eventoObject.Value<Guid>("EventId"), eventoObject.Value<string>("EventName"),
+                       eventoObject.Value<Guid>("InitiatorId"), eventoObject.Value<string>("InitiatorName"),
+                       messageType);
         }
+
+        private IEnumerable<Guid> GetCurrentUserIds(JObject eventObject)
+        {
+            return eventObject.Value<IEnumerable<Guid>>("UserIds");
+        }
+
+        private IEnumerable<Guid>GetAddedUserIds(JObject eventObject)
+        {
+            try
+            {
+                return eventObject.Value<IEnumerable<Guid>>("AddedUserIds");
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        private IEnumerable<Guid> GetRemovedUserIds(JObject eventObject)
+        {
+            try
+            {
+                return eventObject.Value<IEnumerable<Guid>>("RemovedUserIds");
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        private async Task NotifyEventAndParticipantListUpdated(JObject eventObject, IEnumerable<Guid> userids)
+        {
+            var addedUserIds = GetAddedUserIds(eventObject);
+            var removedUserIds = GetRemovedUserIds(eventObject);
+            var remainingUserIds = userids.Except(addedUserIds);
+
+            //Send Invite event notification for the new invited users
+            if (addedUserIds != null && addedUserIds.Count() > 0)
+            {
+                await NotifyEvent(CreateMessage(eventObject, PushMessageType.EventInvite), addedUserIds);
+            }
+            if (removedUserIds != null && remainingUserIds.Count() > 0)
+            {
+
+                await NotifyEvent(CreateMessage(eventObject, PushMessageType.RemovedFromEvent), removedUserIds);
+            }
+
+            var notificationDataForEventUpdate = CreateMessage(eventObject, PushMessageType.EventUpdate);
+            remainingUserIds.ToList().Remove(notificationDataForEventUpdate.InitiatorId);
+
+            await NotifyEvent(notificationDataForEventUpdate, remainingUserIds);
+        }
+
+        private async Task NotifyEvent(NotificationData notificationData, IEnumerable<Guid> userIds)
+        {
+            var gcmClientIds = await userProfileClient.GetGCMClientIdsByUserIds(userIds);
+
+            this.Notifier.Notify(gcmClientIds, notificationData);
+        }        
+
+        private void NotifyAdditionalRegisteredUserInfoToHost() { }
     }
 }
