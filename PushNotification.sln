@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PushNotificationManager", "PushNotificationManager\PushNotificationManager.csproj", "{6C12E4B3-6CEE-4B7A-A328-040EA28B57C4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Service\Service.csproj", "{611616D7-2AE7-4224-9CBF-231376CB2F39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventNotificationListener", "EventNotificationListener\EventNotificationListener.csproj", "{611616D7-2AE7-4224-9CBF-231376CB2F39}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Engaze.Core.DataContract", "..\Core\Engaze.Core.DataContract\Engaze.Core.DataContract.csproj", "{ADBAB747-CB49-4BA6-B0B5-31F53CD274D1}"
 EndProject
