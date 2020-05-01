@@ -1,10 +1,10 @@
 ﻿using Engaze.Core.MessageBroker.Consumer;
 using Newtonsoft.Json.Linq;
-using PushNotification.Manager;
+using Notification.Manager;
 using System;
 using System.Threading.Tasks;
 
-namespace PushNotification.Service
+namespace Notification.Listener
 {
     public class EventoMessageHadler : IMessageHandler
     {

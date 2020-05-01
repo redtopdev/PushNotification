@@ -7,7 +7,7 @@ using PushSharp.Google;
 using System;
 using System.Collections.Generic;
 
-namespace PushNotification.Manager
+namespace Notification.Manager
 {
     public class GCMNotifier : IPushNotifier
     {

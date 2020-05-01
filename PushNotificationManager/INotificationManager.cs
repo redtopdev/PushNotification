@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
 
-namespace PushNotification.Manager
+namespace Notification.Manager
 {
     public interface INotificationManager
     {

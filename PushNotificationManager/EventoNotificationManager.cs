@@ -1,11 +1,12 @@
 ﻿using Engaze.Core.DataContract;
 using Newtonsoft.Json.Linq;
+using Notification.DataContract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PushNotification.Manager
+namespace Notification.Manager
 {
     public class EventoNotificationManager : INotificationManager
     {

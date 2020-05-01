@@ -1,7 +1,7 @@
 ﻿using Engaze.Core.DataContract;
 using System;
 
-namespace PushNotification.Manager
+namespace Notification.DataContract
 {
     public class NotificationData
     {

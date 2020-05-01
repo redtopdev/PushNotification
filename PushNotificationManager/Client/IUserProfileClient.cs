@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace PushNotification.Manager
+namespace Notification.Manager
 {
     public interface IUserProfileClient
     {

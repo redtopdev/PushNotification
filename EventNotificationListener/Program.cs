@@ -1,4 +1,4 @@
-﻿namespace PushNotification.Service
+﻿namespace Notification.Listener
 {
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Configuration;
@@ -6,7 +6,7 @@
     using Microsoft.Extensions.DependencyInjection;
     using System;
     using Engaze.Core.MessageBroker.Consumer;
-    using PushNotification.Manager;
+    using Notification.Manager;
 
     class Program
     {
