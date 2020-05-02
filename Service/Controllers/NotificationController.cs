@@ -25,7 +25,7 @@ namespace Notification.Service
 
 
         [HttpPost("notification/sendreminder")]
-        public async Task<IActionResult> Get(Reminder reminder)
+        public async Task<IActionResult> Post(Reminder reminder)
         {
             logger.LogInformation("Getting location");
 

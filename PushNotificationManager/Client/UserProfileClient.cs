@@ -2,34 +2,44 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Notification.Manager
 {
     public class UserProfileClient : IUserProfileClient
     {
-        IConfiguration configuration;
-        const string UserProfileBaseUrlKey = "UserProfileBaseUrl";
+        IConfiguration configuration;     
         public UserProfileClient(IConfiguration configuration)
         {
             this.configuration = configuration;
         }
-        public async Task<IEnumerable<string>> GetGCMClientIdsByUserIds(IEnumerable<Guid>userIds)
+        public async Task<IEnumerable<string>> GetGCMClientIdsByUserIds(IEnumerable<Guid> userIds)
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(configuration.GetValue<string>(UserProfileBaseUrlKey));
+             
                 MediaTypeWithQualityHeaderValue contentType = new MediaTypeWithQualityHeaderValue("application/json");
                 client.DefaultRequestHeaders.Accept.Add(contentType);
                 //HTTP GET
-                var response = await client.GetAsync("users/gcmids");
+
+                StringBuilder queryParamsBr = new StringBuilder("?");
+                userIds.ToList().ForEach(userid => queryParamsBr.Append($"userIds={userid}&"));
+                var queryParams = queryParamsBr.ToString().TrimEnd('&');
+
+                var uri = configuration.GetValue<string>("UserProfileBaseUrl") + "/users/users/gmcclientid" + queryParams;
+
+
+                var response = await client.GetAsync(uri);
 
                 if (response.IsSuccessStatusCode)
                 {
-                    string stringData = await response.Content.ReadAsStringAsync();
+                    var stringData = await response.Content.ReadAsStringAsync();
                     if (string.IsNullOrEmpty(stringData))
                     {
                         return null;
