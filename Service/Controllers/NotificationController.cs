@@ -4,7 +4,7 @@
 
 namespace Notification.Service
 {
-   
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
     using Newtonsoft.Json.Linq;
@@ -24,7 +24,7 @@ namespace Notification.Service
             this.notificationManager = notificationManager;
         }
 
-
+/*
         [HttpPost("notification/sendreminder")]
         public async Task<IActionResult> Post(Reminder reminder)
         {
@@ -43,24 +43,22 @@ namespace Notification.Service
             return Ok();
         }
 
+    */
+
 
         [HttpPost("notification/notifyparticipants")]
-        public async Task<IActionResult> NotifyEventParticipants(JObject eventObject)
+        public async Task<IActionResult> Post(JObject eventObject)
         {
             logger.LogInformation("Getting location");
-            notificationManager.HandleEvent(eventObject);
-
-            //validate 
-            //string message = await locationManager.ValidateLocationRequest(userId, eventId);
-            //if (string.IsNullOrEmpty(message))
-            //{
-            //    return BadRequest(message);
-            //}
-
-            //put try catch only when you want to return custom message or status code, else this will
-            //be caught in ExceptionHandling middleware so no need to put try catch here
-
-            return Ok();
+            try
+            {
+                notificationManager.HandleEvent(eventObject);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
         }
     }
 }
