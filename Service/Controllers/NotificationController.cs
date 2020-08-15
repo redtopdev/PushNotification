@@ -7,6 +7,7 @@ namespace Notification.Service
    
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
+    using Newtonsoft.Json.Linq;
     using Notification.DataContract;
     using Notification.Manager;
     using System;
@@ -40,6 +41,26 @@ namespace Notification.Service
             //be caught in ExceptionHandling middleware so no need to put try catch here
 
             return Ok();
-        }       
+        }
+
+
+        [HttpPost("notification/notifyparticipants")]
+        public async Task<IActionResult> NotifyEventParticipants(JObject eventObject)
+        {
+            logger.LogInformation("Getting location");
+            notificationManager.HandleEvent(eventObject);
+
+            //validate 
+            //string message = await locationManager.ValidateLocationRequest(userId, eventId);
+            //if (string.IsNullOrEmpty(message))
+            //{
+            //    return BadRequest(message);
+            //}
+
+            //put try catch only when you want to return custom message or status code, else this will
+            //be caught in ExceptionHandling middleware so no need to put try catch here
+
+            return Ok();
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace Notification.DataContract
 
         public string ResponderName { get; set; }
 
-        public EventAcceptanceState EventAcceptanceState { get; set; }
+        public EventAcceptanceStatus EventAcceptanceState { get; set; }
 
         public string DestinationName { get; set; }
 

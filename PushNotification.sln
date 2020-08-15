@@ -7,11 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PushNotificationManager", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventNotificationListener", "EventNotificationListener\EventNotificationListener.csproj", "{611616D7-2AE7-4224-9CBF-231376CB2F39}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Engaze.Core.DataContract", "..\Core\Engaze.Core.DataContract\Engaze.Core.DataContract.csproj", "{ADBAB747-CB49-4BA6-B0B5-31F53CD274D1}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notification", "Service\Notification.csproj", "{C601356E-D8CB-42EF-902B-AE0FA23F568F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataContract", "DataContract\DataContract.csproj", "{67D7620E-C8F9-4A96-BFED-1BE342EBA169}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataContract", "DataContract\DataContract.csproj", "{67D7620E-C8F9-4A96-BFED-1BE342EBA169}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,10 +25,6 @@ Global
 		{611616D7-2AE7-4224-9CBF-231376CB2F39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{611616D7-2AE7-4224-9CBF-231376CB2F39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{611616D7-2AE7-4224-9CBF-231376CB2F39}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ADBAB747-CB49-4BA6-B0B5-31F53CD274D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ADBAB747-CB49-4BA6-B0B5-31F53CD274D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ADBAB747-CB49-4BA6-B0B5-31F53CD274D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ADBAB747-CB49-4BA6-B0B5-31F53CD274D1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C601356E-D8CB-42EF-902B-AE0FA23F568F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C601356E-D8CB-42EF-902B-AE0FA23F568F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C601356E-D8CB-42EF-902B-AE0FA23F568F}.Release|Any CPU.ActiveCfg = Release|Any CPU

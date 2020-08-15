@@ -81,7 +81,7 @@ namespace Notification.Manager
                     notficationData = CreateMessage(eventObject, PushMessageType.EventLeave);
                     notficationData.ResponderId = eventObject.Value<Guid>("RequesterId");
                     notficationData.ResponderName = eventObject.Value<string>("RequesterName");
-                    notficationData.EventAcceptanceState = eventObject.Value<EventAcceptanceState>("EventAcceptanceState");
+                    notficationData.EventAcceptanceState = eventObject.Value<EventAcceptanceStatus>("EventAcceptanceState");
                     userIds.ToList().Remove(notficationData.ResponderId.Value);
                     await NotifyEvent(notficationData, userIds);
                     break;                    
