@@ -21,7 +21,10 @@ namespace Notification.Manager
 
         public async Task HandleEvent(JObject eventObject)
         {
-            var eventType = eventObject.Value<OccuredEventType>("EventType");
+            //var res = eventObject["Destination"]["Address"].ToString();
+            //var eventType = eventObject.Value<OccuredEventType>("EventType");
+            OccuredEventType eventType = ParseMyEnum<OccuredEventType>(eventObject.Value<string>("EventType"));
+
             var userIds = GetCurrentUserIds(eventObject);
             switch (eventType)
             {
@@ -78,10 +81,10 @@ namespace Notification.Manager
                     break;
 
                 case OccuredEventType.ParticipantStateUpdated:
-                    notficationData = CreateMessage(eventObject, PushMessageType.EventLeave);
+                    notficationData = CreateMessage(eventObject, PushMessageType.EventResponse);
                     notficationData.ResponderId = eventObject.Value<Guid>("RequesterId");
                     notficationData.ResponderName = eventObject.Value<string>("RequesterName");
-                    notficationData.EventAcceptanceState = eventObject.Value<EventAcceptanceStatus>("EventAcceptanceState");
+                    notficationData.EventAcceptanceState = ParseMyEnum<EventAcceptanceStatus>(eventObject.Value<string>("CurrentParticipant.acceptanceStatus"));
                     userIds.ToList().Remove(notficationData.ResponderId.Value);
                     await NotifyEvent(notficationData, userIds);
                     break;                    
@@ -98,7 +101,9 @@ namespace Notification.Manager
 
         private IEnumerable<Guid> GetCurrentUserIds(JObject eventObject)
         {
-            return eventObject.Value<IEnumerable<Guid>>("UserIds");
+            //return eventObject.Value<IEnumerable<Guid>>("UserIds");
+            var list = eventObject["Participants"].ToObject<IEnumerable<Participant>>();
+            return list.Select(x=>x.UserId);
         }
 
         private IEnumerable<Guid>GetAddedUserIds(JObject eventObject)
@@ -111,6 +116,12 @@ namespace Notification.Manager
             {
                 return null;
             }
+        }
+
+        public T ParseMyEnum<T>(object o)
+        {
+            T enumVal = (T)Enum.Parse(typeof(T), o.ToString());
+            return enumVal;
         }
 
         private IEnumerable<Guid> GetRemovedUserIds(JObject eventObject)
@@ -150,9 +161,18 @@ namespace Notification.Manager
 
         private async Task NotifyEvent(NotificationData notificationData, IEnumerable<Guid> userIds)
         {
-            var gcmClientIds = await userProfileClient.GetGCMClientIdsByUserIds(userIds);
+            try
+            {
+                List<string> list = new List<string>();
+                list.Add("c0G-NUzkoHk:APA91bFZqxGHq4ux_JTWoDkMyhVhCLX8G6yRzTTK3O7IC-lDLz-hfj-ETUcSFalDKg37SbcpSOfKc3uCP2i8F2kW-7rV8-tiY4sREWNJWAyvQBYciMAgmj9gN0KcecBJFfl3HDLgkavC");
+                var gcmClientIds = list.AsEnumerable();//await userProfileClient.GetGCMClientIdsByUserIds(userIds);
 
-            this.Notifier.Notify(gcmClientIds, notificationData);
+                this.Notifier.Notify(gcmClientIds, notificationData);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception in NotifyEvent. "+ex.Message);
+            }
         }        
 
         private void NotifyAdditionalRegisteredUserInfoToHost() { }

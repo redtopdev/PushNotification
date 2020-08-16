@@ -16,9 +16,9 @@ namespace Notification.Service
 
         public override void ConfigureComponentServices(IServiceCollection services)
         {
-            services.AddTransient<IPushNotifier>();
-            services.AddTransient<IUserProfileClient>();
-            services.AddTransient<INotificationManager>();            
+            services.AddTransient<IPushNotifier, GCMNotifier>();
+            services.AddTransient<IUserProfileClient, UserProfileClient>();
+            services.AddTransient<INotificationManager, EventoNotificationManager>();            
         }
 
         public override void ConfigureComponent(IApplicationBuilder app)
