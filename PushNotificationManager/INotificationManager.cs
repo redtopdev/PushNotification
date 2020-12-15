@@ -6,6 +6,6 @@ namespace Notification.Manager
     public interface INotificationManager
     {
        
-        Task HandleEvent(JObject eventObject);
+        Task HandleEvent(JObject eventNotification);
     }
 }

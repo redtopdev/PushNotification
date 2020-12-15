@@ -4,7 +4,6 @@
 
 namespace Notification.Service
 {
-    using Engaze.Core.DataContract;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
@@ -15,6 +14,7 @@ namespace Notification.Service
     using System.Threading.Tasks;
 
     [ApiController]
+    [Route("/")]
     public class NotificationController : ControllerBase
     {
         private ILogger<NotificationController> logger;
@@ -48,13 +48,13 @@ namespace Notification.Service
 
 
         [HttpPost("notification/notifyparticipants")]
-        public async Task<IActionResult> Post(Event eventData)
+        public async Task<IActionResult> Post(EventNotification eventNotification)
         {
             logger.LogInformation("Getting location");
             try
             {
-                JObject eventJObj = JObject.FromObject(eventData);
-                notificationManager.HandleEvent(eventJObj);
+                JObject eventNotificationJObj = JObject.FromObject(eventNotification);
+                await notificationManager.HandleEvent(eventNotificationJObj);
                 return Ok();
             }
             catch (Exception ex)

@@ -47,7 +47,7 @@ namespace Notification.Manager
 
         private void NotificationSucceeded(GcmNotification notification)
         {
-            //throw new NotImplementedException();
+            Console.WriteLine("notification successful");
         }
 
         private void NotificationFailed(GcmNotification notification, AggregateException exception)

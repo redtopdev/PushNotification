@@ -1,4 +1,6 @@
 ﻿using Engaze.Core.DataContract;
+using FirebaseAdmin.Messaging;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Notification.DataContract;
 using System;
@@ -10,26 +12,29 @@ namespace Notification.Manager
 {
     public class EventoNotificationManager : INotificationManager
     {
-        private IPushNotifier Notifier;
-        private IUserProfileClient userProfileClient;
+        private readonly IPushNotifier notifier;
+        private readonly IUserProfileClient userProfileClient;
 
         public EventoNotificationManager(IPushNotifier notifier, IUserProfileClient userProfileClient)
         {
-            this.Notifier = notifier;
+            this.notifier = notifier;
             this.userProfileClient = userProfileClient;
         }
 
-        public async Task HandleEvent(JObject eventObject)
+        public async Task HandleEvent(JObject eventNotificationJObj)
         {
-            //var res = eventObject["Destination"]["Address"].ToString();
-            //var eventType = eventObject.Value<OccuredEventType>("EventType");
-            OccuredEventType eventType = ParseMyEnum<OccuredEventType>(eventObject.Value<string>("EventType"));
-
+            var eventObject = eventNotificationJObj.Value<JObject>("Event");
+            var notficationData = CreateMessage(eventObject, PushMessageType.EventEnd);
             var userIds = GetCurrentUserIds(eventObject);
+            userIds.ToList().Remove(notficationData.InitiatorId);
+       
+            OccuredEventType eventType = ParseMyEnum<OccuredEventType>(eventNotificationJObj.Value<string>("NotificationType"));
+
+          
             switch (eventType)
             {
                 case OccuredEventType.EventoCreated:
-                    var notficationData = CreateMessage(eventObject, PushMessageType.EventInvite);
+                     notficationData = CreateMessage(eventObject, PushMessageType.EventInvite);
                     userIds.ToList().Remove(notficationData.InitiatorId);
                     await NotifyEvent(notficationData, userIds);
                     break;
@@ -39,7 +44,7 @@ namespace Notification.Manager
                     break;
 
                 case OccuredEventType.EventoDeleted:
-                     notficationData = CreateMessage(eventObject, PushMessageType.EventDeleted);
+                    notficationData = CreateMessage(eventObject, PushMessageType.EventDeleted);
                     userIds.ToList().Remove(notficationData.InitiatorId);
                     await NotifyEvent(notficationData, userIds);
                     break;
@@ -87,7 +92,7 @@ namespace Notification.Manager
                     notficationData.EventAcceptanceState = ParseMyEnum<EventAcceptanceStatus>(eventObject.Value<string>("CurrentParticipant.acceptanceStatus"));
                     userIds.ToList().Remove(notficationData.ResponderId.Value);
                     await NotifyEvent(notficationData, userIds);
-                    break;                    
+                    break;
             }
         }
 
@@ -103,10 +108,10 @@ namespace Notification.Manager
         {
             //return eventObject.Value<IEnumerable<Guid>>("UserIds");
             var list = eventObject["Participants"].ToObject<IEnumerable<Participant>>();
-            return list.Select(x=>x.UserId);
+            return list.Select(x => x.UserId);
         }
 
-        private IEnumerable<Guid>GetAddedUserIds(JObject eventObject)
+        private IEnumerable<Guid> GetAddedUserIds(JObject eventObject)
         {
             try
             {
@@ -161,19 +166,29 @@ namespace Notification.Manager
 
         private async Task NotifyEvent(NotificationData notificationData, IEnumerable<Guid> userIds)
         {
+            List<string> fcmClientids = new List<string>();
+            fcmClientids.Add("cFo_GGivRnWzPzTxVTEZPy:APA91bFmMOmoScO_-sUCk6TNVQ_GupCe4IoNcatgg9_Vlrzc15DoslZuyWnrJJj9Ve_W_fooRjICjGxjZLDrmOHsg6ifdU8qOpjvZHrO_DSPBoZfLlprsi-b1abwBezZ1dyf70gtnH6_");
             try
-            {
-                List<string> list = new List<string>();
-                list.Add("c0G-NUzkoHk:APA91bFZqxGHq4ux_JTWoDkMyhVhCLX8G6yRzTTK3O7IC-lDLz-hfj-ETUcSFalDKg37SbcpSOfKc3uCP2i8F2kW-7rV8-tiY4sREWNJWAyvQBYciMAgmj9gN0KcecBJFfl3HDLgkavC");
-                var gcmClientIds = list.AsEnumerable();//await userProfileClient.GetGCMClientIdsByUserIds(userIds);
+            {             
 
-                this.Notifier.Notify(gcmClientIds, notificationData);
+                var registrationTokens = userIds;
+                var message = new MulticastMessage()
+                {
+                    Tokens = fcmClientids,
+                    Data = new Dictionary<string, string>()
+                    {
+                        {"EventType", notificationData.MessageType.ToString()},
+                        {"Data",  JsonConvert.SerializeObject(notificationData)},
+                    },
+                };
+                var response = await FirebaseMessaging.DefaultInstance.SendMulticastAsync(message);
+                return ;
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception in NotifyEvent. "+ex.Message);
+                Console.WriteLine("Exception in NotifyEvent. " + ex.Message);
             }
-        }        
+        }
 
         private void NotifyAdditionalRegisteredUserInfoToHost() { }
     }
