@@ -6,6 +6,7 @@ using PushSharp.Google;
 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Notification.Manager
 {
@@ -21,7 +22,7 @@ namespace Notification.Manager
 
         }
 
-        public void Notify<T>(IEnumerable<string> registrationIds, T notificationData) where T : class
+        public async Task Notify<T>(IEnumerable<string> registrationIds, T notificationData, string notificationType = null) where T : class
         {
             brokerService.Start();
             foreach (var regId in registrationIds)
@@ -52,7 +53,8 @@ namespace Notification.Manager
 
         private void NotificationFailed(GcmNotification notification, AggregateException exception)
         {
-            exception.Handle(ex => {
+            exception.Handle(ex =>
+            {
 
                 // See what kind of exception it was to further diagnose
                 if (ex is GcmNotificationException)

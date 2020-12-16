@@ -1,6 +1,4 @@
 ﻿using Engaze.Core.DataContract;
-using FirebaseAdmin.Messaging;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Notification.DataContract;
 using System;
@@ -23,49 +21,47 @@ namespace Notification.Manager
 
         public async Task HandleEvent(JObject eventNotificationJObj)
         {
+            NotificationData notficationData;
             var eventObject = eventNotificationJObj.Value<JObject>("Event");
-            var notficationData = CreateMessage(eventObject, PushMessageType.EventEnd);
-            var userIds = GetCurrentUserIds(eventObject);
-            userIds.ToList().Remove(notficationData.InitiatorId);
-       
+            var userIds = GetEventParticipants(eventObject);
+
+
             OccuredEventType eventType = ParseMyEnum<OccuredEventType>(eventNotificationJObj.Value<string>("NotificationType"));
 
-          
+
             switch (eventType)
             {
                 case OccuredEventType.EventoCreated:
-                     notficationData = CreateMessage(eventObject, PushMessageType.EventInvite);
-                    userIds.ToList().Remove(notficationData.InitiatorId);
+                    notficationData = CreateMessage(eventObject, PushMessageType.EventInvite);
+                    userIds.ToList().Remove(eventObject.Value<Guid>("InitiatorId"));
                     await NotifyEvent(notficationData, userIds);
                     break;
 
                 case OccuredEventType.EventoUpdated:
                     await NotifyEventAndParticipantListUpdated(eventObject, userIds);
+                    userIds.ToList().Remove(eventObject.Value<Guid>("InitiatorId"));
                     break;
 
                 case OccuredEventType.EventoDeleted:
                     notficationData = CreateMessage(eventObject, PushMessageType.EventDeleted);
-                    userIds.ToList().Remove(notficationData.InitiatorId);
+                    userIds.ToList().Remove(eventObject.Value<Guid>("InitiatorId"));
                     await NotifyEvent(notficationData, userIds);
                     break;
 
                 case OccuredEventType.EventoEnded:
-
                     notficationData = CreateMessage(eventObject, PushMessageType.EventEnd);
-                    userIds.ToList().Remove(notficationData.InitiatorId);
+                    userIds.ToList().Remove(eventObject.Value<Guid>("InitiatorId"));
                     await NotifyEvent(notficationData, userIds);
                     break;
 
                 case OccuredEventType.EventoExtended:
-
                     notficationData = CreateMessage(eventObject, PushMessageType.EventExtend);
+                    userIds.ToList().Remove(eventObject.Value<Guid>("InitiatorId"));
                     notficationData.ExtendDuration = eventObject.Value<int>("ExtendDuration");
-                    userIds.ToList().Remove(notficationData.InitiatorId);
                     await NotifyEvent(notficationData, userIds);
                     break;
 
                 case OccuredEventType.ParticipantLeft:
-
                     notficationData = CreateMessage(eventObject, PushMessageType.EventLeave);
                     notficationData.ResponderId = eventObject.Value<Guid>("RequesterId");
                     notficationData.ResponderName = eventObject.Value<string>("RequesterName");
@@ -76,7 +72,6 @@ namespace Notification.Manager
                 case OccuredEventType.DestinationUpdated:
                     notficationData = CreateMessage(eventObject, PushMessageType.EventUpdateLocation);
                     notficationData.DestinationName = eventObject.Value<string>("DestinationName");
-                    userIds = GetCurrentUserIds(eventObject);
                     userIds.ToList().Remove(notficationData.InitiatorId);
                     await NotifyEvent(notficationData, userIds);
                     break;
@@ -104,7 +99,7 @@ namespace Notification.Manager
                        messageType);
         }
 
-        private IEnumerable<Guid> GetCurrentUserIds(JObject eventObject)
+        private IEnumerable<Guid> GetEventParticipants(JObject eventObject)
         {
             //return eventObject.Value<IEnumerable<Guid>>("UserIds");
             var list = eventObject["Participants"].ToObject<IEnumerable<Participant>>();
@@ -165,31 +160,8 @@ namespace Notification.Manager
         }
 
         private async Task NotifyEvent(NotificationData notificationData, IEnumerable<Guid> userIds)
-        {
-            List<string> fcmClientids = new List<string>();
-            fcmClientids.Add("cFo_GGivRnWzPzTxVTEZPy:APA91bFmMOmoScO_-sUCk6TNVQ_GupCe4IoNcatgg9_Vlrzc15DoslZuyWnrJJj9Ve_W_fooRjICjGxjZLDrmOHsg6ifdU8qOpjvZHrO_DSPBoZfLlprsi-b1abwBezZ1dyf70gtnH6_");
-            try
-            {             
-
-                var registrationTokens = userIds;
-                var message = new MulticastMessage()
-                {
-                    Tokens = fcmClientids,
-                    Data = new Dictionary<string, string>()
-                    {
-                        {"EventType", notificationData.MessageType.ToString()},
-                        {"Data",  JsonConvert.SerializeObject(notificationData)},
-                    },
-                };
-                var response = await FirebaseMessaging.DefaultInstance.SendMulticastAsync(message);
-                return ;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception in NotifyEvent. " + ex.Message);
-            }
-        }
-
-        private void NotifyAdditionalRegisteredUserInfoToHost() { }
+            =>
+            await notifier.Notify(userIds.Select(userId=>userId.ToString()), notificationData, notificationData.MessageType.ToString());           
+       
     }
 }

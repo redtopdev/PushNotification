@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Notification.Manager
 {
     public interface IPushNotifier
     {
-        void Notify<T>(IEnumerable<string> registrationIds, T notificationData) where T : class;
+        Task Notify<T>(IEnumerable<string> registrationIds, T notificationData, string notificationType = null) where T : class;
     }
 }

@@ -9,6 +9,7 @@ namespace Notification.Service
     using Microsoft.Extensions.DependencyInjection;
     using Notification.Manager;
     using Serilog;
+    using System.Text.Json.Serialization;
 
     public class Startup : EngazeStartup
     {
@@ -16,7 +17,12 @@ namespace Notification.Service
 
         public override void ConfigureComponentServices(IServiceCollection services)
         {
-            services.AddTransient<IPushNotifier, GCMNotifier>();
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
+
+            services.AddTransient<IPushNotifier, FCMNotifier>();
             services.AddTransient<IUserProfileClient, UserProfileClient>();
             services.AddTransient<INotificationManager, EventoNotificationManager>();            
         }
